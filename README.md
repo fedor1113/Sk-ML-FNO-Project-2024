@@ -4,7 +4,7 @@ This repository is created as the the final project for [Machine Learning MA0600
 
 - [Fourier Neural Operator](https://github.com/khassibi/fourier-neural-operator/blob/main/README.md)
 
-We have trained a model with FNO algorithm to sove 1D generalized classical Burger's equation . 
+We have trained a model with FNO algorithm to sove 1D generalized classical Burger's equation. 
 
 $$
     \partial_t u + \alpha u^\delta \partial_x u = \partial_x^2 u + \beta u \left( 1 - u^\delta \right),
@@ -22,57 +22,19 @@ where $\alpha \neq 0$, $\beta$ and $\delta > 0$.
     - [4 FNO layers with 5001 points mesh](results%20fno%201d/fno-4layers-5001.pth)
 
 - Testing and data analysis
-    - [Animation of the training and testing](results%20fno%201d/animation.npy)
     - [L2 error for 1001 points mesh](results%20fno%201d/l2-1001.png), etc.
     - [MSE error for 1001 points mesh](results%20fno%201d/mse-1001.png), etc.
     - [Testing animation](results%20fno%201d/nn.gif)
 
 
+We have trained a model to solve 2D heat equation with FNO algorithm.
 
-perform experiments on Burgers' equation, Darcy flow, and the Navier-Stokes equation (including the turbulent regime). 
-Our Fourier neural operator shows state-of-the-art performance compared to existing neural network methodologies and it is up to three orders of magnitude faster compared to traditional PDE solvers.
+$$
+    \partial_t u = k_c \left( \partial_x^2 u + \partial_y^2 u \right)
+$$
 
-It follows from the previous works:
-- [(GKN) Neural Operator: Graph Kernel Network for Partial Differential Equations](https://arxiv.org/abs/2003.03485)
-- [(MGKN) Multipole Graph Neural Operator for Parametric Partial Differential Equations](https://arxiv.org/abs/2006.09535)
-
-
-## Requirements
-- We have updated the files to support [PyTorch 1.8.0](https://pytorch.org/). 
-Pytorch 1.8.0 starts to support complex numbers and it has a new implementation of FFT. 
-As a result the code is about 30% faster.
-- Previous version for [PyTorch 1.6.0](https://pytorch.org/) is avaiable at `FNO-torch.1.6`.
-
-## Files
-The code is in the form of simple scripts. Each script shall be stand-alone and directly runnable.
-
-- `fourier_1d.py` is the Fourier Neural Operator for 1D problem such as the (time-independent) Burgers equation discussed in Section 5.1 in the [paper](https://arxiv.org/pdf/2010.08895.pdf).
-- `fourier_2d.py` is the Fourier Neural Operator for 2D problem such as the Darcy Flow discussed in Section 5.2 in the [paper](https://arxiv.org/pdf/2010.08895.pdf).
-- `fourier_2d_time.py` is the Fourier Neural Operator for 2D problem such as the Navier-Stokes equation discussed in Section 5.3 in the [paper](https://arxiv.org/pdf/2010.08895.pdf), 
-which uses a recurrent structure to propagates in time.
-- `fourier_3d.py` is the Fourier Neural Operator for 3D problem such as the Navier-Stokes equation discussed in Section 5.3 in the [paper](https://arxiv.org/pdf/2010.08895.pdf),
-which takes the 2D spatial + 1D temporal equation directly as a 3D problem
-- The lowrank methods are similar. These scripts are the Lowrank neural operators for the corresponding settings.
-- `data_generation` are the conventional solvers we used to generate the datasets for the Burgers equation, Darcy flow, and Navier-Stokes equation.
-
-## Datasets
-We provide the Burgers equation, Darcy flow, and Navier-Stokes equation datasets we used in the paper. 
-The data generation configuration can be found in the paper.
-- [PDE datasets](https://drive.google.com/drive/folders/1UnbQh2WWc6knEHbLn-ZaXrKUZhp7pjt-?usp=sharing)
-
-The datasets are given in the form of matlab file. They can be loaded with the scripts provided in utilities.py. 
-Each data file is loaded as a tensor. The first index is the samples; the rest of indices are the discretization.
-For example, 
-- `Burgers_R10.mat` contains the dataset for the Burgers equation. It is of the shape [1000, 8192], 
-meaning it has 1000 training samples on a grid of 8192.
-- `NavierStokes_V1e-3_N5000_T50.mat` contains the dataset for the 2D Navier-Stokes equation. It is of the shape [5000, 64, 64, 50], 
-meaning it has 5000 training samples on a grid of (64, 64) with 50 time steps.
-
-We also provide the data generation scripts at `data_generation`.
-
-## Models
-Here are the pre-trained models. It can be evaluated using _eval.py_ or _super_resolution.py_.
-- [models](https://drive.google.com/drive/folders/1swLA6yKR1f3PKdYSKhLqK4zfNjS9pt_U?usp=sharing)
+- The mode was trained with this file [fno2d.ipynb](fno2d.ipynb)
+- [Result](results%20fno%201d/panic%20(1).gif) 
 
 ## Citations
 
@@ -94,4 +56,144 @@ Here are the pre-trained models. It can be evaluated using _eval.py_ or _super_r
       archivePrefix={arXiv},
       primaryClass={cs.LG}
 }
+
+
+@article{Brunton2015,
+	author = {Steven L. Brunton and Joshua L. Proctor and J. Nathan Kutz},
+	journal = {Proceedings of the National Academy of Sciences},
+	pages = {3932--3937},
+	title = {Discovering governing equations from data by sparse identification of nonlinear dynamical systems},
+	url = {https://api.semanticscholar.org/CorpusID:1594001},
+	volume = {113},
+	year = {2015}
+}
+
+@article{Forootani2023ARS,
+	author = {Ali Forootani and Pawan Goyal and Peter Benner},
+	journal = {ArXiv},
+	title = {A Robust SINDy Approach by Combining Neural Networks and an Integral Form},
+	url = {https://api.semanticscholar.org/CorpusID:261823341},
+	volume = {abs/2309.07193},
+	year = {2023}
+}
+
+@article{Brunton2013CompressiveSA,
+	author = {Steven L. Brunton and Jonathan H. Tu and Ido Bright and J. Nathan Kutz},
+	journal = {SIAM J. Appl. Dyn. Syst.},
+	pages = {1716--1732},
+	title = {Compressive Sensing and Low-Rank Libraries for Classification of Bifurcation Regimes in Nonlinear Dynamical Systems},
+	url = {https://api.semanticscholar.org/CorpusID:15950036},
+	volume = {13},
+	year = {2013}
+}
+
+@article{Kiser2023ExactIO,
+	author = {Shawn L. Kiser and Mikhail Alexandrovich Guskov and Marc R'ebillat and Nicolas Ranc},
+	journal = {ArXiv},
+	title = {Exact identification of nonlinear dynamical systems by Trimmed Lasso},
+	url = {https://api.semanticscholar.org/CorpusID:260438377},
+	volume = {abs/2308.01891},
+	year = {2023}
+}
+
+@article{Li2020FourierNO,
+	author = {Zong-Yi Li and Nikola B. Kovachki and Kamyar Azizzadenesheli and Burigede Liu and Kaushik Bhattacharya and Andrew M. Stuart and Anima Anandkumar},
+	journal = {ArXiv},
+	title = {Fourier Neural Operator for Parametric Partial Differential Equations},
+	url = {https://api.semanticscholar.org/CorpusID:224705257},
+	volume = {abs/2010.08895},
+	year = {2020}
+}
+
+@article{LuLu2021DeepOnet,
+	author = {Lu Lu and Pengzhan Jin and Guofei Pang and Zhongqiang Zhang and George Karniadakis},
+	doi = {10.1038/s42256-021-00302-5},
+	journal = {Nature Machine Intelligence},
+	month = {03},
+	pages = {218--229},
+	title = {Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators},
+	volume = {3},
+	year = {2021}
+}
+
+@article{Marvian2014ExtendingNT,
+	author = {Iman Marvian and Robert W. Spekkens},
+	journal = {Nature Communications},
+	title = {Extending Noether{\rq}s theorem by quantifying the asymmetry of quantum states},
+	url = {https://api.semanticscholar.org/CorpusID:17343800},
+	volume = {5},
+	year = {2014}
+}
+
+@article{Raissi2017PhysicsID,
+	author = {Maziar Raissi and Paris Perdikaris and George Em Karniadakis},
+	journal = {ArXiv},
+	title = {Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations},
+	url = {https://api.semanticscholar.org/CorpusID:394392},
+	volume = {abs/1711.10561},
+	year = {2017}
+}
+
+@article{HORNIK1989359,
+	abstract = {This paper rigorously establishes that standard multilayer feedforward networks with as few as one hidden layer using arbitrary squashing functions are capable of approximating any Borel measurable function from one finite dimensional space to another to any desired degree of accuracy, provided sufficiently many hidden units are available. In this sense, multilayer feedforward networks are a class of universal approximators.},
+	author = {Kurt Hornik and Maxwell Stinchcombe and Halbert White},
+	doi = {10.1016/0893-6080(89)90020-8},
+	issn = {0893-6080},
+	journal = {Neural Networks},
+	keywords = {Feedforward networks, Universal approximation, Mapping networks, Network representation capability, Stone-Weierstrass Theorem, Squashing functions, Sigma-Pi networks, Back-propagation networks},
+	number = {5},
+	pages = {359--366},
+	title = {Multilayer feedforward networks are universal approximators},
+	url = {https://www.sciencedirect.com/science/article/pii/0893608089900208; https://www.sciencedirect.com/science/article/pii/0893608089900208},
+	volume = {2},
+	year = {1989}
+}
+
+@inproceedings{Zhao2022IncrementalSL,
+	author = {Jiawei Zhao and Robert Joseph George and Zong-Yi Li and Anima Anandkumar},
+	booktitle = {NeurIPS 2022 AI for Science Workshop},
+	title = {Incremental Spectral Learning in Fourier Neural Operator},
+	url = {https://api.semanticscholar.org/CorpusID:256627806},
+	year = {2022}
+}
+
+@book{murray2002introduction,
+	author = {James Dickson Murray},
+	publisher = {Springer New York, NY},
+	subtitle = {I. An introduction},
+	title = {Mathematical Biology},
+	url = {https://doi.org/10.1007/b98868},
+	year = {2002}
+}
+
+@article{Wang_1990,
+	abstract = {Exact solitary wave solutions of the generalised Burgers-Huxley equation delta u/ delta t- alpha udelta  delta u/ delta chi - delta 2u/ delta chi 2= beta u(1-udelta )(udelta - gamma ) are obtained by using the relevant nonlinear transformations. The results obtained are the generalisation of former work. The method in this paper can also be applied to the Burgers-Fisher equation.},
+	author = {X Y Wang and Z S Zhu and Y K Lu},
+	doi = {10.1088/0305-4470/23/3/011},
+	journal = {Journal of Physics A: Mathematical and General},
+	month = {feb},
+	number = {3},
+	pages = {271},
+	publisher = {},
+	title = {Solitary wave solutions of the generalised Burgers-Huxley equation},
+	url = {https://dx.doi.org/10.1088/0305-4470/23/3/011},
+	volume = {23},
+	year = {1990}
+}
+
+@article{ISMAIL2004203,
+	abstract = {Solving generalized Fisher and Burger--Fisher equations by the finite difference technique yields difficult nonlinear system of equations. In this paper linearization and restrictive Pad{\'e} approximation is considered. It yields more accurate and faster results. Also the stability analysis is discussed. Numerical results are treated.},
+	author = {Hassan N.A. Ismail and Aziza A.Abd Rabboh},
+	doi = {10.1016/S0096-3003(03)00703-3},
+	issn = {0096-3003},
+	journal = {Applied Mathematics and Computation},
+	number = {1},
+	pages = {203--210},
+	title = {A restrictive Pad{\'e} approximation for the solution of the generalized Fisher and Burger--Fisher equations},
+	url = {https://www.sciencedirect.com/science/article/pii/S0096300303007033},
+	volume = {154},
+	year = {2004}
+}
+
+
 ```
