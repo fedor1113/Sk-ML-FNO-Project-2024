@@ -1,0 +1,1 @@
+Our project code here allows to generate generalized Burgers-Fisher equation analytically solvable problem and heat equation image blur (minus the original images) datasets. The FNO notebooks learn FNO on these datasets. Resulting net parameters are here in the results directory.
