@@ -4,7 +4,7 @@ This repository is created as the the final project for [Machine Learning MA0600
 
 - [Fourier Neural Operator](https://github.com/khassibi/fourier-neural-operator/blob/main/README.md)
 
-We have trained a model with FNO algorithm to sove 1D generalized classical Burger's equation. 
+We have trained a model with FNO algorithm to solve 1D generalized Burgers-Fisher equation. 
 
 $$
     \partial_t u + \alpha u^\delta \partial_x u = \partial_x^2 u + \beta u \left( 1 - u^\delta \right),
@@ -33,7 +33,7 @@ $$
     \partial_t u = k_c \left( \partial_x^2 u + \partial_y^2 u \right)
 $$
 
-- The mode was trained with this file [fno2d.ipynb](fno2d.ipynb)
+- The model was trained with this file [fno2d.ipynb](fno2d.ipynb)
 - [Result](results%20fno%201d/panic%20(1).gif) 
 
 ## Citations
