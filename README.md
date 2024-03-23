@@ -13,7 +13,8 @@ $$
 where $\alpha \neq 0$, $\beta$ and $\delta > 0$.
 
 - The training data were generated with the file [gen-burges-fisher-gen.ipynb](gen-burgers-fisher-gen.ipynb)
-    - [Generated datasets](https://kaggle.com/datasets/14b1e5b86bc461380277887164c2b9e88716c56510b9ded8d064731f68c4fba5)
+    - [Generated Burgers-Fisher datasets](https://kaggle.com/datasets/14b1e5b86bc461380277887164c2b9e88716c56510b9ded8d064731f68c4fba5)
+    - [Skoltech picture dataset](https://kaggle.com/datasets/6228b6270a9f707b18f4a2b04fe085787577780a9b48c122a3b501af4c6e9b11)
 - The mode was trained with this file [fno1d-notebook.ipynb](fno1d-notebook.ipynb)
 - Learned parameters was extracted into the files
     - [4 FNO layers with 1001 points mesh](results%20fno%201d/fno-4layers-1001.pth)
